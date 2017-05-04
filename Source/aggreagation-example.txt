@@ -1,0 +1,34 @@
+Oh what fun!
+
+1) Generate 3 services using Swagger editor
+	2 / 3 Yamls saved here
+
+2) Nice to show the auto mock (look at baseurl in YAML)
+
+3) Careful: as at some point the Yaml for client generation must be edited
+
+4) Generate / download each service as NodeJS
+
+5) Edit index.js to change the port for each one
+
+6) Run each with npm start
+
+7) Show the test page (URL docs in terminal)
+
+8) Create a 4th service (Catalog)
+
+9) Convert the service to support typescript
+
+10) Generate nodejs typescript client and add to project
+	
+
+11) See /home/mjrw/Documents/BBC-Microservices/Source/nodejs-services
+
+**) Could wrap these services as a docker composition :-)
+
+**) Note the URL ends up looking like: http://localhost:8099/MikeWay/Catalog/1.0.0/product/1
+
+
+***) I've moved the service files to docker/ServicesToAggreate and created a docker image: docker run -it -P services-to-aggregate:latest
+
+

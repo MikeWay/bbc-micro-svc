@@ -1,0 +1,53 @@
+swagger: '2.0'
+info:
+  description: This is a simple API
+  version: 1.0.0
+  title: Simple Inventory API
+  # put the contact info for your development or API team
+  contact:
+    email: you@your-company.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# all paths will be relative to the basePath specified
+# basePath: /v1
+
+# tags are used for organizing operations
+tags:
+- name: admins
+  description: Secured Admin-only calls
+- name: developers
+  description: Operations available to regular developers
+schemes:
+- https
+paths:
+  /leadTime/{itemId}:
+    get:
+      tags:
+      - developers
+      summary: Returns the number of days to get an item into stock
+      operationId: searchInventory
+      description: |
+        By passing in the itemId it will return the number of days to fulfill the stock
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: itemId
+        description: pass an optional search string for looking up inventory
+        required: true
+        type: string
+      responses:
+        200:
+          description: search results matching criteria
+          schema:
+            description: number of days
+            type: number
+            example: 22
+        400:
+          description: bad input parameter
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /MikeWay/SimplePurchase/1.0.0

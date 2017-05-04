@@ -1,0 +1,32 @@
+Examine the challenges of distributed systems
+Identify the suitability of Microservices
+Apply design patterns to Microservice architecture
+Evaluate NoSQL database models
+Simplify service deployment with containerisation
+Explore serverless services
+
+
+
+S 21: Diagrams to illustrate Brewers Theorem! - 30 - 40 mins
+
+S 32: Discussion  / group ex 20 mins
+
+Somewhere around 46 : design a set of services 30 mins
+
+
+Swagger Demo - 15 + Exercise -- Build a Swagger API from a spec
+
+ -- result of this should be a running service.
+
+Swagger as a Proxy Demo: 15 mins
+(Maybe show service invoke with Postman then from Proxy).
+
+
+S62 Service Aggregation Ex
+
+40 mins
+
+
+
+
+

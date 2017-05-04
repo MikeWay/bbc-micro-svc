@@ -1,0 +1,68 @@
+---
+swagger: "2.0"
+info:
+  description: "Aggregated catalog data"
+  version: "1.0.0"
+  title: "Simple Catalog API"
+  contact:
+    email: "you@your-company.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8099"
+basePath: "/MikeWay/Catalog/1.0.0"
+tags:
+- name: "admins"
+  description: "Secured Admin-only calls"
+- name: "developers"
+  description: "Operations available to regular developers"
+schemes:
+- "http"
+paths:
+  /product/{productId}:
+    get:
+      summary: "searches inventory"
+      description: "By passing in the appropriate options, you can search for\navailable\
+        \ inventory in the system\n"
+      operationId: "getPordocutById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "productId"
+        in: "path"
+        description: "pass an optional search string for looking up inventory"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Product"
+        400:
+          description: "bad input parameter"
+      x-swagger-router-controller: "Default"
+definitions:
+  Product:
+    type: "object"
+    required:
+    - "description"
+    - "id"
+    - "leadTime"
+    - "name"
+    - "stockCount"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        example: "Widget Adapter"
+      description:
+        type: "string"
+      stockCount:
+        type: "number"
+      leadTime:
+        type: "number"

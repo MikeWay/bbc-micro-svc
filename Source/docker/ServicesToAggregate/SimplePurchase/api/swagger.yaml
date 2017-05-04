@@ -1,0 +1,48 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a simple API"
+  version: "1.0.0"
+  title: "Simple Inventory API"
+  contact:
+    email: "you@your-company.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "virtserver.swaggerhub.com"
+basePath: "/MikeWay/SimplePurchase/1.0.0"
+tags:
+- name: "admins"
+  description: "Secured Admin-only calls"
+- name: "developers"
+  description: "Operations available to regular developers"
+schemes:
+- "https"
+paths:
+  /leadTime/{itemId}:
+    get:
+      tags:
+      - "developers"
+      summary: "Returns the number of days to get an item into stock"
+      description: "By passing in the itemId it will return the number of days to\
+        \ fulfill the stock\n"
+      operationId: "searchInventory"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "itemId"
+        in: "path"
+        description: "pass an optional search string for looking up inventory"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "number"
+            example: 22
+            description: "number of days"
+        400:
+          description: "bad input parameter"
+      x-swagger-router-controller: "Developers"
+definitions: {}
