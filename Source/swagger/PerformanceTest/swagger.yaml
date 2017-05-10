@@ -1,0 +1,53 @@
+swagger: '2.0'
+info:
+  title: Performance Test
+  version: 1.0.0
+host: testserver
+schemes:
+  - http
+  - https
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /test:
+    post:
+      tags:
+        - test
+      summary: Send a request to be echoed back
+      operationId: test
+      consumes:
+        - application/json
+      produces:
+        - application/xml
+      parameters:
+        - in: body
+          name: input
+          description: Value to be echoed back
+          required: true
+          schema:
+            $ref: '#/definitions/Input'
+      responses:
+        '200':
+          description: Response value
+          schema:
+            $ref: '#/definitions/Output'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Input:
+    type: number
+  Output:
+    type: number
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string

@@ -1,0 +1,18 @@
+This is an attempt to show that virtualisation can be quicker than running natively
+
+In theory, start two instances in different AZ's
+
+Two projects:
+
+/home/mjrw/Documents/BBC-Microservices/Source/docker/PerfTestClient
+
+/home/mjrw/Documents/BBC-Microservices/Source/docker/PerfTestServer
+
+Also a composition in PerfTestCompose
+
+The docker images are pushed as mjrw/perftesclient and mjrw/perftestserver
+
+Environment variable ENV_BASE_PATH=http://server:8092/v1 can be used to change the server running when you launch docker
+
+
+In principle, just run docker-compose up from /home/mjrw/Documents/BBC-Microservices/Source/docker/PerfTestCompose

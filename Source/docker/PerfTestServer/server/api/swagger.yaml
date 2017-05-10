@@ -1,0 +1,64 @@
+---
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Performance Test"
+host: "localhost:8092"
+basePath: "/v1"
+schemes:
+- "http"
+- "https"
+produces:
+- "application/json"
+paths:
+  /test:
+    post:
+      tags:
+      - "test"
+      summary: "Send a request to be echoed back"
+      operationId: "test"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "input"
+        description: "Value to be echoed back"
+        required: true
+        schema:
+          type: "number"
+      responses:
+        200:
+          description: "Response value"
+          schema:
+            type: "number"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/inline_response_default"
+      x-swagger-router-controller: "Test"
+definitions:
+  Input:
+    type: "number"
+  Output:
+    type: "number"
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
+      fields:
+        type: "string"
+  inline_response_default:
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
+      fields:
+        type: "string"

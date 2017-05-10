@@ -1,0 +1,21 @@
+{
+  "name": "PerfTestClient",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+	  "prestart": "npm install",
+	  "start": "node src/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "3.5.0",
+    "request": "2.81.0"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.18",
+    "typescript": "^2.3.2"
+  }
+}

@@ -1,0 +1,15 @@
+version: "3"
+services:
+
+  server:
+    image: mjrw/perftestserver
+    ports:
+      - "8092"
+  client:
+    image: mjrw/perftestclient
+    depends_on: 
+      - server
+    environment:
+      - ENV_BASE_PATH=http://server:8092/v1
+
+
