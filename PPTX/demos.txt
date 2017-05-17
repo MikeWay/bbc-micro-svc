@@ -1,0 +1,130 @@
+﻿Demos
+
+Swagger Demo
+
+Open the swagger editor
+Look at petstore
+Let’s create a simple API (GET + POST) from scratch (I need a sample).
+
+/home/mjrw/Documents/BBC-Microservices/Source/swagger/SimpleDemo
+
+Proxy DEMO
+
+Based on the YAML file from /home/mjrw/Documents/BBC-Microservices/Source/swagger/SimpleDemo/echo.yaml
+
+Create a NodeJS server
+
+Unzip the server into a  folder
+
+Edit EchoServer/controllers/DefaultService.js
+
+Change return from rootPOST to
+
+ res.end("Name:" + args.name.value + " Year:" + args.year.value);
+
+
+npm start
+
+Use the docs URL http://localhost:8080/docs
+
+Test the post method: should see our values echoed
+
+Explain the generated code produces the proxy
+
+
+
+Optional: to create a container
+
+Docker file:
+FROM node:6-onbuild
+EXPOSE 8092
+
+docker build -t mjrw/echo-server .
+Docker run … -p 8092:8092 mjrw/echo-server
+
+
+
+AWS DEMO
+
+Use my account.
+
+Walk thru the whole process of key creation, instance selection, starting an instance and connecting to it.
+
+
+DOCKER DEMO
+
+//Start a container with MYSQL 
+docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=MyPassword -d mysql:8.0.1
+
+docker ps // Show it is running
+
+docker inspect  mysql-container
+
+Get the host IP – it’s near the end of the output
+
+// Launch another container point out that is is linked – allows ports to be shared across instances
+// This container is runing the mysql client but could be running any client application
+
+// -h is the ip address to connect to (from inspect)
+
+docker run -it --rm mysql sh -c 'exec mysql -h 172.17.0.5 -P 3306 -uroot -p"MyPassword"'
+
+exit
+In the instance
+
+show databases;
+use mysql;
+show tables;
+
+Exit the container and run:
+docker run -it  --rm mysql  bash
+
+Show there is a real file system
+
+Docker Registry
+
+1) Add a new database to the mysql image
+
+docker run --name mysql-container-demo -v /home/mjrw/Documents/BBC-Microservices/Source/docker/MySQLDemo:/sqldata -e MYSQL_ROOT_PASSWORD=MyPassword  -d mysql:8.0.1
+
+Note that the key thing here is the mount of our local dir into /docker-entrypoint-initdb.d
+(refer to the library/mysql docs). The minimal.sql file is automatically read and creates a new db called servicedb.
+
+Use docker exec -it mysql-container-demo bash to connect to the image
+
+Copy the minimal.sql file to the /docker-entrypoint-initdb.d dir
+
+cp sqldata/* docker-entrypoint-initdb.d
+
+Exit bash
+
+Stop the container
+
+docker stop mysql-container-demo
+
+2) Save the image with: 
+docker commit mysql-container-demo bbcdemo/mysqldemo
+// Not the tag starts with the account name
+
+docker run --name mysql-container-from-image -d bbcdemo/mysqldemo
+// Critical there is no password!
+
+1) Get the IP address
+docker run -it --rm mysql sh -c 'exec mysql -h 172.17.0.3 -P 3306 -uroot -p"MyPassword"'
+
+show databases;
+
+servicedb should be there
+Push the image to the registry
+
+docker push bbcdemo/mysqldemo
+
+Prove it works!
+Now, on the remote machine:
+
+docker run --name mysql-container-from-image -d bbcdemo/mysqldemo
+
+docker run -it --rm mysql sh -c 'exec mysql -h 172.17.0.2 -P 3306 -uroot -p"MyPassword"'
+
+
+

@@ -1,11 +1,11 @@
 #!/bin/bash
-cd SimpleInventory
+cd SimpleMembers
 npm start &
 cd ..
-cd SimpleProducts
+cd SimplePurchaseHistory
 npm start &
 cd ..
-cd SimplePurchase
+cd SimpleSubscription
 npm start
 
 
