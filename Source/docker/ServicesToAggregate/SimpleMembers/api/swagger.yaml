@@ -57,6 +57,8 @@ paths:
       responses:
         200:
           description: "Sends the member details"
+          schema:
+            $ref: "#/definitions/inline_response_200"
       x-swagger-router-controller: "Default"
 definitions:
   Member:

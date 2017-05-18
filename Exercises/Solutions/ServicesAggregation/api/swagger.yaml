@@ -1,0 +1,108 @@
+---
+swagger: "2.0"
+info:
+  description: "Basic read operations to support members\n"
+  version: "1.0.0"
+  title: "Member Subscription Service"
+host: "localhost:8099"
+basePath: "/member"
+schemes:
+- "http"
+- "https"
+consumes:
+- "application/json"
+- "text/xml"
+produces:
+- "application/json"
+- "text/html"
+paths:
+  /{memberId}:
+    get:
+      summary: "get a members subscription details"
+      operationId: "getSubsForMember"
+      consumes:
+      - "application/json"
+      - "text/xml"
+      produces:
+      - "application/json"
+      - "text/html"
+      parameters:
+      - name: "memberId"
+        in: "path"
+        description: "ID of the member"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Sends details of subscriptions purchased by a member"
+          schema:
+            type: "array"
+            title: "Members"
+            items:
+              $ref: "#/definitions/inline_response_200"
+      x-swagger-router-controller: "Default"
+definitions:
+  MemberSubscriptionPurchase:
+    type: "object"
+    required:
+    - "email"
+    - "memberId"
+    - "memberName"
+    properties:
+      memberId:
+        type: "integer"
+        format: "int64"
+      memberName:
+        type: "string"
+      email:
+        type: "string"
+      purchases:
+        type: "array"
+        items:
+          $ref: "#/definitions/memberId_purchases"
+  Purchases:
+    type: "object"
+    required:
+    - "price"
+    - "subscriptionId"
+    - "subscriptionName"
+    properties:
+      subscriptionId:
+        type: "number"
+        format: "int64"
+      subscriptionName:
+        type: "string"
+      price:
+        type: "number"
+        format: "double"
+  memberId_purchases:
+    required:
+    - "price"
+    - "subscriptionId"
+    - "subscriptionName"
+    properties:
+      subscriptionId:
+        type: "number"
+        format: "int64"
+      subscriptionName:
+        type: "string"
+      price:
+        type: "number"
+        format: "double"
+  inline_response_200:
+    required:
+    - "email"
+    - "memberId"
+    - "memberName"
+    properties:
+      memberId:
+        type: "integer"
+        format: "int64"
+      memberName:
+        type: "string"
+      email:
+        type: "string"
+      purchases:
+        type: "array"
+        items:
+          $ref: "#/definitions/memberId_purchases"

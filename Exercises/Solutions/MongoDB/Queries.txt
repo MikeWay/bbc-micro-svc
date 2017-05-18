@@ -1,0 +1,4 @@
+Create a query for locations with a name of "other" or a z value of 4 (there is a command reference at http://docs.mongodb.org/manual/tutorial/query-documents/)
+
+
+db.locations.find({ $or : [{name:"myplace"},{"location.z":4}]})   

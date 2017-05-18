@@ -39,6 +39,7 @@ exports.memberIdGET = function(args, res, next) {
    **/
   let id = args.memberId.value;
   if (Object.keys(members).length >= 0 && members[Object.keys(members)[0]].length > id) {
+    res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(members[Object.keys(members)[0]][id-1] || {}, null, 2));
   } else {
     res.statusCode=400;

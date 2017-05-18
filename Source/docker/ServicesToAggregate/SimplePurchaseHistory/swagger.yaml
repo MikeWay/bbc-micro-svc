@@ -54,6 +54,8 @@ paths:
       responses:
         '200':
           description: Sends the subscription details
+          schema:
+            $ref: '#/definitions/Purchase'
         '400':
           description: Bad request. subscriptionId does not exist
   '/byMember/{memberId}':
@@ -69,6 +71,8 @@ paths:
       responses:
         '200':
           description: Sends the purchase details
+          schema:
+            $ref: '#/definitions/Purchase'          
         '400':
           description: Bad request. memberId does not exist
 definitions:
@@ -77,7 +81,7 @@ definitions:
       - id
       - subscriptionId
       - memberId
-      - description
+      - name
       - price
     type: object
     properties:
@@ -90,8 +94,8 @@ definitions:
       memberId:
         type: integer
         format: int64
-      description:
+      name:
         type: string
-        format: date
       price:
-        type: string
+        type: number
+        format: double

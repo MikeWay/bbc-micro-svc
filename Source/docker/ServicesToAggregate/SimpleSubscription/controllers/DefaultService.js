@@ -48,6 +48,7 @@ exports.subscriptionIdGET = function(args, res, next) {
    **/
   let id = args.subscriptionId.value;
   if (Object.keys(subscriptions).length >= 0 && subscriptions[Object.keys(subscriptions)[0]].length > id) {
+    res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(subscriptions[Object.keys(subscriptions)[0]][id-1] || {}, null, 2));
   } else {
     res.statusCode=400;

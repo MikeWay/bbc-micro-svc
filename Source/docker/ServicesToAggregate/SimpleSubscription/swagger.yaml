@@ -41,6 +41,8 @@ paths:
       responses:
         '200':
           description: Sends the subscription details
+          schema:
+            $ref: '#/definitions/Subscription'
         '400':
           description: The subscription id does not exist
 definitions:

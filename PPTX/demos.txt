@@ -31,6 +31,8 @@ Test the post method: should see our values echoed
 
 Explain the generated code produces the proxy
 
+Generate Client
+
 
 
 Optional: to create a container

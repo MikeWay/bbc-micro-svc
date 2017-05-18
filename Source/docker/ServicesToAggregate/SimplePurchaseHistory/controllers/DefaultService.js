@@ -1,5 +1,55 @@
 'use strict';
 
+
+  let purchases = {};
+  purchases['application/json'] = [ 
+  {
+    "price" : 11.99,
+    "name" : "Subscription 1",
+    "id" : 1,
+    "subscriptionId" : 1,
+    "memberId" : 1
+  },
+  {
+    "price" : 1.99,
+    "name" : "Subscription 2",
+    "id" : 1,
+    "subscriptionId" : 2,
+    "memberId" : 1
+  },
+  {
+    "price" : 9.99,
+    "name" : "Subscription 3",
+    "id" : 1,
+    "subscriptionId" : 3,
+    "memberId" : 1
+  },
+  {
+    "price" : 11.99,
+    "name" : "Subscription 4",
+    "id" : 1,
+    "subscriptionId" : 1,
+    "memberId" : 2
+  },
+  {
+    "price" : 1.99,
+    "name" : "Subscription 5",
+    "id" : 1,
+    "subscriptionId" : 2,
+    "memberId" : 2
+  },
+  {
+    "price" : 9.99,
+    "name" : "Subscription 6",
+    "id" : 1,
+    "subscriptionId" : 3,
+    "memberId" : 2
+  }    
+
+ 
+
+];
+
 exports.byMemberMemberIdGET = function(args, res, next) {
   /**
    * list all purchases for a single member
@@ -8,7 +58,12 @@ exports.byMemberMemberIdGET = function(args, res, next) {
    * memberId String ID of the member whose purchases are being listed
    * no response value expected for this operation
    **/
-  res.end();
+  let memberId = args.memberId.value;
+  let filtered = purchases[Object.keys(purchases)[0]].filter((purchase)=>{
+    return purchase.memberId==memberId;
+  });
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(filtered || {}, null, 2));
 }
 
 exports.bySubscriptionSubscriptionIdGET = function(args, res, next) {
@@ -19,7 +74,12 @@ exports.bySubscriptionSubscriptionIdGET = function(args, res, next) {
    * subscriptionId String ID of the subscription for which purchases are being listed
    * no response value expected for this operation
    **/
-  res.end();
+  let subId = args.subscriptionId.value;
+  let filtered = purchases[Object.keys(purchases)[0]].filter((purchase)=>{
+    return purchase.subscriptionId==subId;
+  });
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify(filtered || {}, null, 2));
 }
 
 exports.rootGET = function(args, res, next) {
@@ -31,17 +91,10 @@ exports.rootGET = function(args, res, next) {
    * start Integer first purchase to (optional)
    * returns List
    **/
-  var examples = {};
-  examples['application/json'] = [ {
-  "price" : "aeiou",
-  "description" : "2000-01-23",
-  "id" : 123456789,
-  "subscriptionId" : 123456789,
-  "memberId" : 123456789
-} ];
-  if (Object.keys(examples).length > 0) {
+
+  if (Object.keys(purchases).length > 0) {
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+    res.end(JSON.stringify(purchases[Object.keys(purchases)[0]] || {}, null, 2));
   } else {
     res.end();
   }

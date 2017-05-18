@@ -71,6 +71,8 @@ paths:
       responses:
         200:
           description: "Sends the subscription details"
+          schema:
+            $ref: "#/definitions/inline_response_200"
         400:
           description: "Bad request. subscriptionId does not exist"
       x-swagger-router-controller: "Default"
@@ -94,6 +96,8 @@ paths:
       responses:
         200:
           description: "Sends the purchase details"
+          schema:
+            $ref: "#/definitions/inline_response_200"
         400:
           description: "Bad request. memberId does not exist"
       x-swagger-router-controller: "Default"
@@ -101,9 +105,9 @@ definitions:
   Purchase:
     type: "object"
     required:
-    - "description"
     - "id"
     - "memberId"
+    - "name"
     - "price"
     - "subscriptionId"
     properties:
@@ -116,16 +120,16 @@ definitions:
       memberId:
         type: "integer"
         format: "int64"
-      description:
+      name:
         type: "string"
-        format: "date"
       price:
-        type: "string"
+        type: "number"
+        format: "double"
   inline_response_200:
     required:
-    - "description"
     - "id"
     - "memberId"
+    - "name"
     - "price"
     - "subscriptionId"
     properties:
@@ -138,8 +142,8 @@ definitions:
       memberId:
         type: "integer"
         format: "int64"
-      description:
+      name:
         type: "string"
-        format: "date"
       price:
-        type: "string"
+        type: "number"
+        format: "double"
