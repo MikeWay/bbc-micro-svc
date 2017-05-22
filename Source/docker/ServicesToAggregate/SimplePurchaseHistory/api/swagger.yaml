@@ -72,7 +72,10 @@ paths:
         200:
           description: "Sends the subscription details"
           schema:
-            $ref: "#/definitions/inline_response_200"
+            type: "array"
+            title: "Purchases"
+            items:
+              $ref: "#/definitions/inline_response_200"
         400:
           description: "Bad request. subscriptionId does not exist"
       x-swagger-router-controller: "Default"
@@ -97,7 +100,10 @@ paths:
         200:
           description: "Sends the purchase details"
           schema:
-            $ref: "#/definitions/inline_response_200"
+            type: "array"
+            title: "Purchases"
+            items:
+              $ref: "#/definitions/inline_response_200"
         400:
           description: "Bad request. memberId does not exist"
       x-swagger-router-controller: "Default"

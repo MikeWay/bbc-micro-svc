@@ -55,7 +55,10 @@ paths:
         '200':
           description: Sends the subscription details
           schema:
-            $ref: '#/definitions/Purchase'
+            title: Purchases
+            type: array
+            items:          
+              $ref: '#/definitions/Purchase'
         '400':
           description: Bad request. subscriptionId does not exist
   '/byMember/{memberId}':
@@ -72,7 +75,10 @@ paths:
         '200':
           description: Sends the purchase details
           schema:
-            $ref: '#/definitions/Purchase'          
+            title: Purchases
+            type: array
+            items:  
+              $ref: '#/definitions/Purchase'
         '400':
           description: Bad request. memberId does not exist
 definitions:
