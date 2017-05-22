@@ -1,0 +1,101 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Purchase History
+  description: |
+    Basic read operations to access the purchase history
+host: 'localhost:8092'
+basePath: /purchases
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+  - text/xml
+produces:
+  - application/json
+  - text/html
+paths:
+  /:
+    get:
+      summary: list all purchases
+      description: returns a list of purchases
+      parameters:
+        - name: limit
+          in: query
+          description: number of purchases to return
+          type: integer
+          default: 11
+          minimum: 11
+          maximum: 10000
+        - name: start
+          in: query
+          description: first purchase to
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: OK
+          schema:
+            title: Purchases
+            type: array
+            items:
+              $ref: '#/definitions/Purchase'
+  '/bySubscription/{subscriptionId}':
+    get:
+      summary: list all purchases for a single subscription type
+      description: returns a list of subscriptions    
+      parameters:
+        - name: subscriptionId
+          in: path
+          type: string
+          description: ID of the subscription for which purchases are being listed
+          required: true
+      responses:
+        '200':
+          description: Sends the subscription details
+          schema:
+            $ref: '#/definitions/Purchase'
+        '400':
+          description: Bad request. subscriptionId does not exist
+  '/byMember/{memberId}':
+    get:
+      summary: list all purchases for a single member
+      description: returns a list of subscriptions      
+      parameters:
+        - name: memberId
+          in: path
+          type: string
+          description: ID of the member whose purchases are being listed
+          required: true
+      responses:
+        '200':
+          description: Sends the purchase details
+          schema:
+            $ref: '#/definitions/Purchase'          
+        '400':
+          description: Bad request. memberId does not exist
+definitions:
+  Purchase:
+    required:
+      - id
+      - subscriptionId
+      - memberId
+      - name
+      - price
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      subscriptionId:
+        type: integer
+        format: int64
+      memberId:
+        type: integer
+        format: int64
+      name:
+        type: string
+      price:
+        type: number
+        format: double

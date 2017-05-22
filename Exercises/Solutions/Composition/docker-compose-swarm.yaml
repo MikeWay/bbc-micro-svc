@@ -1,0 +1,34 @@
+version: "3"
+services:
+  member:
+    image: bbcdemo/member-service
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8090:8090"
+    networks:
+      - servicenet
+  purchase:
+    image: bbcdemo/purchase-service
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8092:8092"
+    networks:
+      - servicenet
+  subscription:
+    image: bbcdemo/subscription-service
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8091:8091"
+    networks:
+      - servicenet
+networks:
+  servicenet:

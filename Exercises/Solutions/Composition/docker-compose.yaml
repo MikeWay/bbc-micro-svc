@@ -1,0 +1,46 @@
+version: "3"
+services:
+  member:
+    image: member-service
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8090:8090"
+    networks:
+      - servicenet
+  purchase:
+    image: purchase-service
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8092:8092"
+    networks:
+      - servicenet
+  subscription:
+    image: subscription-service
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8091:8091"
+    networks:
+      - servicenet
+networks:
+  servicenet:

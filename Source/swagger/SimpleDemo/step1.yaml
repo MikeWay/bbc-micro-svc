@@ -1,0 +1,22 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Hello World
+  description: |
+    This is a starting point for a servicd
+
+host: localhost:8100
+basePath: /members
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+  - text/xml
+produces:
+  - application/json
+  - text/html
+paths:
+  /:
+    get:
+	

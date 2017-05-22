@@ -2,3 +2,8 @@ Create a query for locations with a name of "other" or a z value of 4 (there is 
 
 
 db.locations.find({ $or : [{name:"myplace"},{"location.z":4}]})   
+
+
+db.subs.find({"Member_Name" : /Michael.*/});
+
+

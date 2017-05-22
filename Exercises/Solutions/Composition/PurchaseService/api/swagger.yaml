@@ -1,0 +1,149 @@
+---
+swagger: "2.0"
+info:
+  description: "Basic read operations to access the purchase history\n"
+  version: "1.0.0"
+  title: "Purchase History"
+host: "localhost:8092"
+basePath: "/purchases"
+schemes:
+- "http"
+- "https"
+consumes:
+- "application/json"
+- "text/xml"
+produces:
+- "application/json"
+- "text/html"
+paths:
+  /:
+    get:
+      summary: "list all purchases"
+      description: "returns a list of purchases"
+      operationId: "rootGET"
+      consumes:
+      - "application/json"
+      - "text/xml"
+      produces:
+      - "application/json"
+      - "text/html"
+      parameters:
+      - name: "limit"
+        in: "query"
+        description: "number of purchases to return"
+        required: false
+        type: "integer"
+        default: 11
+        maximum: 10000
+        minimum: 11
+      - name: "start"
+        in: "query"
+        description: "first purchase to"
+        required: false
+        type: "integer"
+        default: 0
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: "array"
+            title: "Purchases"
+            items:
+              $ref: "#/definitions/inline_response_200"
+      x-swagger-router-controller: "Default"
+  /bySubscription/{subscriptionId}:
+    get:
+      summary: "list all purchases for a single subscription type"
+      description: "returns a list of subscriptions"
+      operationId: "bySubscriptionSubscriptionIdGET"
+      consumes:
+      - "application/json"
+      - "text/xml"
+      produces:
+      - "application/json"
+      - "text/html"
+      parameters:
+      - name: "subscriptionId"
+        in: "path"
+        description: "ID of the subscription for which purchases are being listed"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Sends the subscription details"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        400:
+          description: "Bad request. subscriptionId does not exist"
+      x-swagger-router-controller: "Default"
+  /byMember/{memberId}:
+    get:
+      summary: "list all purchases for a single member"
+      description: "returns a list of subscriptions"
+      operationId: "byMemberMemberIdGET"
+      consumes:
+      - "application/json"
+      - "text/xml"
+      produces:
+      - "application/json"
+      - "text/html"
+      parameters:
+      - name: "memberId"
+        in: "path"
+        description: "ID of the member whose purchases are being listed"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Sends the purchase details"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        400:
+          description: "Bad request. memberId does not exist"
+      x-swagger-router-controller: "Default"
+definitions:
+  Purchase:
+    type: "object"
+    required:
+    - "id"
+    - "memberId"
+    - "name"
+    - "price"
+    - "subscriptionId"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      subscriptionId:
+        type: "integer"
+        format: "int64"
+      memberId:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      price:
+        type: "number"
+        format: "double"
+  inline_response_200:
+    required:
+    - "id"
+    - "memberId"
+    - "name"
+    - "price"
+    - "subscriptionId"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      subscriptionId:
+        type: "integer"
+        format: "int64"
+      memberId:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      price:
+        type: "number"
+        format: "double"
