@@ -49,7 +49,7 @@
      * Callback function to receive the result of the byMemberMemberIdGet operation.
      * @callback module:api/DefaultApi~byMemberMemberIdGetCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/InlineResponse200} data The data returned by the service call.
+     * @param {Array.<module:model/InlineResponse200>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -58,7 +58,7 @@
      * returns a list of subscriptions
      * @param {String} memberId ID of the member whose purchases are being listed
      * @param {module:api/DefaultApi~byMemberMemberIdGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/InlineResponse200}
+     * data is of type: {@link Array.<module:model/InlineResponse200>}
      */
     this.byMemberMemberIdGet = function(memberId, callback) {
       var postBody = null;
@@ -82,7 +82,7 @@
       var authNames = [];
       var contentTypes = ['application/json', 'text/xml'];
       var accepts = ['application/json', 'text/html'];
-      var returnType = InlineResponse200;
+      var returnType = [InlineResponse200];
 
       return this.apiClient.callApi(
         '/byMember/{memberId}', 'GET',
@@ -95,7 +95,7 @@
      * Callback function to receive the result of the bySubscriptionSubscriptionIdGet operation.
      * @callback module:api/DefaultApi~bySubscriptionSubscriptionIdGetCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/InlineResponse200} data The data returned by the service call.
+     * @param {Array.<module:model/InlineResponse200>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -104,7 +104,7 @@
      * returns a list of subscriptions
      * @param {String} subscriptionId ID of the subscription for which purchases are being listed
      * @param {module:api/DefaultApi~bySubscriptionSubscriptionIdGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/InlineResponse200}
+     * data is of type: {@link Array.<module:model/InlineResponse200>}
      */
     this.bySubscriptionSubscriptionIdGet = function(subscriptionId, callback) {
       var postBody = null;
@@ -128,7 +128,7 @@
       var authNames = [];
       var contentTypes = ['application/json', 'text/xml'];
       var accepts = ['application/json', 'text/html'];
-      var returnType = InlineResponse200;
+      var returnType = [InlineResponse200];
 
       return this.apiClient.callApi(
         '/bySubscription/{subscriptionId}', 'GET',
