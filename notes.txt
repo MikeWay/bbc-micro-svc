@@ -29,4 +29,17 @@ S62 Service Aggregation Ex
 
 
 
+*****************
+Oct Run
+*****************
+
+1) Show mocking working!
+
+2) Get them to do EX Defining a Service Interface with Swagger
+
+3) Then on to Docker
+
+
+
+
 
